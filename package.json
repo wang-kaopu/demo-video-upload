@@ -8,14 +8,16 @@
   },
   "scripts": {
     "build:example:douyin": "esbuild examples/douyin-electron-main.ts --bundle --platform=node --format=cjs --target=node22 --external:electron --outfile=dist/douyin-electron-main.cjs && esbuild examples/douyin-electron-renderer.ts --bundle --platform=node --format=iife --target=node22 --external:electron --outfile=dist/douyin-electron-renderer.js",
+    "build:service": "esbuild service/douyin-video.ts --bundle --packages=external --platform=node --format=esm --target=node22 --external:electron --outfile=dist/service/douyin-electron-main.mjs && esbuild service/douyin-video.ts --bundle --platform=node --format=iife --target=node22 --external:electron --log-override:empty-import-meta=silent --outfile=dist/service/douyin-electron-renderer.js",
     "example:baijiahao": "tsx examples/baijiahao-upload.ts",
     "example:bilibili": "tsx examples/bilibili-upload.ts",
     "example:douyin": "npm run build:example:douyin && tsx examples/douyin-upload.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test examples/*.test.ts",
+    "test:service": "npm run build:service && tsx --test service/*.test.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "check": "npm run typecheck && npm run lint && npm test"
+    "check": "npm run typecheck && npm run lint && npm test && npm run test:service"
   },
   "dependencies": {
     "axios": "^1.18.1",
