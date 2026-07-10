@@ -1327,6 +1327,26 @@ await http.post(url, bodyText, {
 }
 ```
 
+### 17.6.1 当前 Demo 实现
+
+`examples/douyin-upload.ts` 是 Node CLI，负责参数校验和启动固定版本 Electron。Electron 主进程：
+
+- 把 `assets/douyin` 作为独立 `userData/sessionData` 根目录；
+- 通过 `session.fromPath(assets/douyin/<partition id>)` 直接打开复制的账号 Session；
+- 创建两个 `show: false` 的 BrowserWindow，共用上述 Session；
+- 在本地 renderer 中使用 Axios XHR 执行第 1～15、17 步；
+- 在官方 Creator 页面中加载在线 BDMS，第 16 步用 CDP 截获签名 URL并立即
+  `Fetch.failRequest`；
+- 在主进程中按 `_ae/CIt` 生成 ticket-guard Header，并计算 VOD/ImageX V4 签名。
+
+CLI 必须显式指定 `--source-partition <纯数字 id>`。默认仍会真实上传视频和封面并执行第 16 步，
+但不会提交作品；只有 `--upload` 才执行第 17 步。可见性默认为 `--visibility self`，还支持
+`friends` 和 `public`。第 17 步不重试。
+
+当前 Demo 不读取 Playwright storage-state，也不依赖小豆芽进程、NewRank `getDySign` 或
+`electron.net.request()`。partition 由 Electron 自行读写，不能手工修改其 Cookies SQLite、
+LevelDB 或 IndexedDB；`assets/douyin` 必须保持在 Git 忽略列表中。
+
 ### 17.7 验证要求
 
 本地实现需要完成两类验证：
@@ -1346,16 +1366,16 @@ await http.post(url, bodyText, {
 - `msToken` 被二次编码，或与当前 Cookie 会话不匹配。
 - `bd-ticket-guard-client-data`、CSRF Token 或其他登录态数据缺失。
 
-## 实现文件建议
+## 当前实现文件
 
-本机发布实现建议拆分为：
+Demo 本机发布实现拆分为：
 
-- `src/platforms/douyin/device-profile.ts`：本机 UA、屏幕、平台和时区配置。
-- `src/platforms/douyin/common-params.ts`：构造 `commonParams` 和签名参数。
-- `src/platforms/douyin/query-serializer.ts`：实现稳定的查询参数序列化。
-- `src/platforms/douyin/a-bogus-runtime.ts`：管理真实 partition Webview、BDMS 初始化和 CDP 拦截。
-- `src/platforms/douyin-publisher.ts`：使用本地签名并发送原始 Body 字符串。
-- `tests/douyin/a-bogus-runtime.test.ts`：验证参数顺序、Body 原样传递和拦截后终止请求。
+- `examples/douyin-upload.ts`：Node CLI 和 Electron 子进程入口。
+- `examples/douyin-electron-main.ts`：真实 partition Session、隐藏窗口、ticket guard、V4 和 CDP。
+- `examples/douyin-electron-renderer.ts`：Axios XHR 第 1～15/17 步及唯一 Body 序列化链路。
+- `examples/douyin-runtime-core.ts`：设备配置、公共参数、CRC、分片和话题提取。
+- `examples/douyin-publish.ts`：稳定 Query、文案、可见性和 `create_v2` Payload。
+- `examples/douyin-upload.test.ts`：纯逻辑和 CLI 安全默认值测试。
 
 当前结论是：完整 `commonParams` 可以按原包证据直接实现；真实 partition 中的
 `bdms + CDP Fetch` 本机签名链路已经跑通，并能在请求发往网络前取得签名。纯 Node.js

@@ -19,6 +19,7 @@
 
 - [Bilibili 视频上传 Demo](../examples/README.md)：使用 `assets` 中的 Cookie、视频、封面和文案验证本机上传链路；最终投稿必须显式传入 `--publish`。
 - [Douyin 视频上传 Demo](../examples/README.md#douyin)：使用 Playwright storage-state 和 Demo 素材验证第 1～15 步；不调用 `create_v2`。
+- [百家号视频上传 Demo](../examples/README.md#百家号)：使用 storage-state 和单一封面完成原包上传链路；最终发布必须显式传入 `--upload`。
 
 ## 关键结论
 

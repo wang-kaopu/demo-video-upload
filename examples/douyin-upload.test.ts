@@ -1,153 +1,20 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import test from "node:test";
 
 import {
-  adaptDouyinStorageState,
+  buildPublishPayload,
+  getVisibilityValue,
+  parsePublishText,
+  serializeQuery,
+} from "./douyin-publish.js";
+import {
   buildCommonParams,
-  buildCookieHeader,
   calculateCrc32,
   createChunkDescriptors,
   createMachineProfile,
   extractTopicNames,
-  serializeQuery,
-  type PlaywrightStorageState,
-} from "./douyin-upload.js";
-
-const REPOSITORY_ROOT = join(import.meta.dirname, "..");
-
-/**
- * 验证 storage-state 会生成账号 Cookie、编码 token 和未经预编码的 msToken。
- */
-test("adaptDouyinStorageState preserves the three credential representations", () => {
-  const state: PlaywrightStorageState = {
-    cookies: [
-      {
-        domain: ".douyin.com",
-        expires: 2_000,
-        httpOnly: true,
-        name: "sessionid",
-        path: "/",
-        sameSite: "None",
-        secure: true,
-        value: "session",
-      },
-    ],
-    origins: [
-      {
-        localStorage: [
-          { name: "xmst", value: "raw token/+=" },
-          { name: "security-sdk/example", value: '{"secret":true}' },
-          { name: "ignored", value: "value" },
-        ],
-        origin: "https://creator.douyin.com",
-      },
-    ],
-  };
-
-  const adapted = adaptDouyinStorageState(state);
-  const cookies = JSON.parse(adapted.cookie) as Array<Record<string, unknown>>;
-  const tokens = JSON.parse(adapted.token) as Array<Record<string, unknown>>;
-
-  assert.equal(adapted.msToken, "raw token/+=");
-  assert.equal(cookies[0]?.sameSite, "no_restriction");
-  assert.equal(cookies[0]?.expirationDate, 2_000);
-  assert.equal(tokens.length, 2);
-  assert.equal(tokens[0]?.value, "raw%20token%2F%2B%3D");
-  assert.equal(tokens.some(({ name }) => name === "ignored"), false);
-});
-
-/**
- * 验证 localStorage 没有 xmst 时使用最后一个 Cookie msToken。
- */
-test("adaptDouyinStorageState falls back to the last msToken cookie", () => {
-  const state: PlaywrightStorageState = {
-    cookies: [
-      {
-        domain: ".douyin.com",
-        expires: -1,
-        httpOnly: false,
-        name: "msToken",
-        path: "/",
-        sameSite: "Lax",
-        secure: true,
-        value: "first",
-      },
-      {
-        domain: "creator.douyin.com",
-        expires: -1,
-        httpOnly: false,
-        name: "msToken",
-        path: "/",
-        sameSite: "Lax",
-        secure: true,
-        value: "last",
-      },
-    ],
-    origins: [{ localStorage: [], origin: "https://creator.douyin.com" }],
-  };
-
-  assert.equal(adaptDouyinStorageState(state).msToken, "last");
-});
-
-/**
- * 验证真实 Demo storage-state 能提取 xmst，但不输出任何凭据值。
- */
-test("adaptDouyinStorageState accepts the bundled Douyin storage-state", async () => {
-  const state = JSON.parse(
-    await readFile(join(REPOSITORY_ROOT, "assets/124_douyin.json"), "utf8"),
-  ) as PlaywrightStorageState;
-  const adapted = adaptDouyinStorageState(state);
-
-  assert.ok(adapted.cookie.length > 0);
-  assert.ok(adapted.token.length > 0);
-  assert.ok(adapted.msToken.length > 0);
-});
-
-/**
- * 验证 Cookie Header 会过滤域名和过期项，并优先排列更具体的 domain。
- */
-test("buildCookieHeader filters cookies for creator.douyin.com", () => {
-  const cookieJson = JSON.stringify([
-    {
-      domain: ".douyin.com",
-      httpOnly: false,
-      name: "shared",
-      path: "/",
-      sameSite: "lax",
-      secure: true,
-      session: true,
-      value: "parent",
-    },
-    {
-      domain: "creator.douyin.com",
-      expirationDate: 2_000,
-      httpOnly: false,
-      name: "shared",
-      path: "/",
-      sameSite: "lax",
-      secure: true,
-      session: false,
-      value: "creator",
-    },
-    {
-      domain: ".example.com",
-      httpOnly: false,
-      name: "foreign",
-      path: "/",
-      sameSite: "lax",
-      secure: true,
-      session: true,
-      value: "ignored",
-    },
-  ]);
-
-  assert.equal(
-    buildCookieHeader(cookieJson, "https://creator.douyin.com/path", 1_000),
-    "shared=creator; shared=parent",
-  );
-});
+} from "./douyin-runtime-core.js";
+import { parseCliOptions } from "./douyin-upload.js";
 
 /**
  * 验证操作系统检测只生成 macOS/Windows 内部一致配置。
@@ -164,11 +31,24 @@ test("createMachineProfile selects a matching platform and UA", () => {
 });
 
 /**
- * 验证 commonParams 从同一设备配置派生 Mozilla 名称和完整版本文本。
+ * 验证公共参数完全从选中的设备配置派生。
  */
 test("buildCommonParams derives browser fields from the selected profile", () => {
   const params = buildCommonParams(createMachineProfile("darwin"));
 
+  assert.deepEqual(Object.keys(params), [
+    "cookie_enabled",
+    "screen_width",
+    "screen_height",
+    "browser_language",
+    "browser_platform",
+    "browser_name",
+    "browser_version",
+    "browser_online",
+    "timezone_name",
+    "aid",
+    "support_h265",
+  ]);
   assert.equal(params.browser_name, "Mozilla");
   assert.match(params.browser_version, /^5\.0 \(Macintosh/u);
   assert.equal(params.browser_platform, "MacIntel");
@@ -212,4 +92,53 @@ test("extractTopicNames returns at most five unique hashtags", () => {
     extractTopicNames("正文 #一 #二 #一 #三 #四 #五 #六"),
     ["一", "二", "三", "四", "五"],
   );
+});
+
+/**
+ * 验证首个非空行是标题，并且后续行保持为描述。
+ */
+test("parsePublishText separates title and description", () => {
+  assert.deepEqual(parsePublishText("\n演示标题\n第一行\n第二行 #话题\n"), {
+    description: "第一行\n第二行 #话题",
+    title: "演示标题",
+  });
+  assert.throws(() => parsePublishText("这是一个超过二十个汉字的标题用于触发明确校验错误"), /20/u);
+});
+
+/**
+ * 验证发布 Payload 使用已恢复的可见性枚举和结构化话题。
+ */
+test("buildPublishPayload creates a self-visible create_v2 body", () => {
+  const payload = buildPublishPayload({
+    coverHeight: 1280,
+    coverUri: "cover-uri",
+    coverUrl: "https://example.test/cover.png",
+    coverWidth: 720,
+    description: "描述 #演示",
+    now: 1_700_000_000_000,
+    title: "标题",
+    topics: [{ id: "123", name: "演示" }],
+    videoId: "video-id",
+    visibility: "self",
+  });
+  const common = (payload.item as { common: Record<string, unknown> }).common;
+
+  assert.equal(common.visibility_type, 1);
+  assert.equal(common.video_id, "video-id");
+  assert.match(String(common.text), /#演示/u);
+  assert.equal(getVisibilityValue("public"), 0);
+  assert.equal(getVisibilityValue("friends"), 2);
+});
+
+/**
+ * 验证 CLI 强制选择 partition，默认不发布且仅自己可见。
+ */
+test("parseCliOptions requires a numeric partition and safe defaults", () => {
+  assert.throws(() => parseCliOptions([]), /source-partition/u);
+  assert.throws(() => parseCliOptions(["--source-partition", "abc"]), /纯数字/u);
+
+  const options = parseCliOptions(["--source-partition", "1783645517194"]);
+  assert.equal(options?.sourcePartition, "1783645517194");
+  assert.equal(options?.upload, false);
+  assert.equal(options?.visibility, "self");
 });

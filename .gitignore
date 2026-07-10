@@ -2,3 +2,5 @@ node_modules/
 dist/
 coverage/
 *.log
+assets/douyin/
+assets/125_baijiahao.json

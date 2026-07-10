@@ -7,8 +7,10 @@
     "node": ">=22"
   },
   "scripts": {
+    "build:example:douyin": "esbuild examples/douyin-electron-main.ts --bundle --platform=node --format=cjs --target=node22 --external:electron --outfile=dist/douyin-electron-main.cjs && esbuild examples/douyin-electron-renderer.ts --bundle --platform=node --format=iife --target=node22 --external:electron --outfile=dist/douyin-electron-renderer.js",
+    "example:baijiahao": "tsx examples/baijiahao-upload.ts",
     "example:bilibili": "tsx examples/bilibili-upload.ts",
-    "example:douyin": "tsx examples/douyin-upload.ts",
+    "example:douyin": "npm run build:example:douyin && tsx examples/douyin-upload.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test examples/*.test.ts",
     "lint": "eslint .",
@@ -20,11 +22,15 @@
     "axios-retry": "^4.5.0",
     "crc-32": "1.2.2",
     "file-type": "^22.0.1",
-    "p-limit": "^7.3.0"
+    "mp4box": "^2.4.1",
+    "p-limit": "^7.3.0",
+    "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^22.20.1",
+    "electron": "37.10.3",
+    "esbuild": "^0.28.1",
     "eslint": "^10.6.0",
     "tsx": "^4.23.0",
     "typescript": "~6.0.0",

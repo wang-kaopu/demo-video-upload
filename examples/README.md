@@ -71,44 +71,122 @@ npm run example:bilibili -- \
 
 ## Douyin
 
-抖音示例按照 [`docs/douyin.md`](../docs/douyin.md) 的第 1～15 步，完成创作者中心登录态适配、
-VOD 视频上传与提交、视频校验、ImageX 封面上传与提交、封面 URL 获取和话题搜索。
+抖音示例按照 [`docs/douyin.md`](../docs/douyin.md) 的第 1～17 步实现。它直接使用
+`assets/douyin/<partition>` 中的 Electron Session，通过隐藏 Creator 窗口加载官方 BDMS，并以
+CDP 截获签名后的 URL。该签名探测请求总是在联网前终止，只有显式传入 `--upload` 才会另行提交作品。
 
 默认素材：
 
-- Cookie：`assets/124_douyin.json`
 - 视频：`assets/demo.mp4`
 - 封面：`assets/demo.png`
 - 文案：`assets/demo.txt`
 
+账号目录必须包含：
+
+- `assets/douyin/Local State`
+- `assets/douyin/<partition id>/` 的完整内容
+
+不要手工改写其中的 Cookies SQLite、Local Storage 或其他 Chromium 数据。账号目录包含完整登录凭据，
+已由 `.gitignore` 排除。
+
 ### 上传但不发布
 
 ```bash
-npm run example:douyin
+npm run example:douyin -- --source-partition 1783645517194
 ```
 
-该命令会真实上传视频和封面，在抖音远端留下未发布素材。当前版本不会计算 `a_bogus`，不会调用
-`create_v2`，也不提供 `--upload` 正式发布参数。
+该命令会真实执行第 1～16 步，上传视频和封面并验证官方 BDMS 可以产生 `a_bogus`，但不会调用
+`create_v2`。失败后不会清理已上传的远端素材。
+
+### 正式发布
+
+```bash
+npm run example:douyin -- \
+  --source-partition 1783645517194 \
+  --upload
+```
+
+默认可见性是 `self`（仅自己可见）。也可显式使用 `--visibility friends` 或
+`--visibility public`。第 17 步不自动重试，避免接口成功但客户端未收到响应时重复发布。
 
 ### 覆盖默认素材
 
 ```bash
 npm run example:douyin -- \
-  --cookies /path/to/124_douyin.json \
+  --source-partition 1783645517194 \
   --video /path/to/video.mp4 \
   --cover /path/to/cover.jpg \
   --text /path/to/description.txt
 ```
 
-运行时根据当前系统自动选择 macOS 或 Windows 设备配置；其他系统会直接报错。视频按 5 MiB 分片，
-最多三个分片并发上传；每片失败后按 1、2、4 秒等待重试。
+文案的第一个非空行作为标题，最多 20 个字符；后续行作为描述。运行时根据当前系统自动选择
+macOS 或 Windows 的一致设备配置；其他系统直接报错。视频按 5 MiB 分片，最多三个分片并发上传；
+每片失败后按 1、2、4 秒等待重试。
 
 话题搜索最多处理文案中前五个去重 `#话题`。搜索失败或没有完全匹配时忽略该话题，不影响已经完成的
 视频和封面上传。
 
 ### Douyin 安全说明
 
-- storage-state、Cookie、`xmst`、security-sdk 数据和临时上传密钥都是敏感登录凭据，不得提交到公开仓库。
+- partition、Cookie、`xmst`、security-sdk 数据和临时上传密钥都是敏感登录凭据，不得提交到仓库。
 - Douyin Demo 不打印凭据、签名、完整请求 URL、请求体或二进制素材。
+- Demo 直接读写指定 partition；运行期间不要让其他 Electron 进程同时打开同一份复制目录。
 - 不支持跨进程断点续传；失败后重新执行会创建新的 VOD/ImageX 上传会话。
 - `video/enable` 和 `video/transend` 按原包各请求一次，不实现原包中不存在的转码轮询状态机。
+
+## 百家号
+
+百家号示例按照 [`docs/baijiahao.md`](../docs/baijiahao.md) 复刻当前本机发布入口。它使用
+Playwright storage-state 中的全部有效百度 Cookie，通过 Node.js Axios 直接请求平台接口，不需要
+Electron 或浏览器运行时。
+
+默认素材：
+
+- Cookie：`assets/125_baijiahao.json`
+- 视频：`assets/demo.mp4`
+- 封面：`assets/demo.png`
+- 文案：`assets/demo.txt`
+
+只支持 MP4。运行时从视频轨道读取时长和宽高，`width >= height` 自动使用横版发布参数，否则使用
+竖版发布参数。单一源封面会在内存中自动生成 1280×720 横版 JPEG 和 1080×1440 竖版 JPEG。
+
+### 上传但不发布
+
+```bash
+npm run example:baijiahao
+```
+
+默认命令会真实获取 `app_id`、创建预上传任务、依次上传竖版和横版封面、上传并汇总视频分片、
+搜索话题并构造发布参数，但不会调用最终发布接口。远端会保留已经上传的视频和封面素材。
+
+### 正式发布
+
+```bash
+npm run example:baijiahao -- --upload
+```
+
+`--upload` 只增加最后一次 `/pcui/article/publish` 请求。该请求不自动重试，成功响应会输出 `nid`，
+作品仍需经过平台审核。视频发布接口没有原包可证实的可见性字段，因此 Demo 不提供可见性参数。
+
+### 覆盖默认素材
+
+```bash
+npm run example:baijiahao -- \
+  --cookies /path/to/baijiahao.json \
+  --video /path/to/video.mp4 \
+  --cover /path/to/cover.jpg \
+  --text /path/to/description.txt
+```
+
+文案第一个非空行作为标题，后续行作为描述。`#话题` 会从描述删除并并发查询，最终只提交文案顺序中
+第一个精确匹配的话题；删除话题后描述为空时回退为标题。
+
+### 百家号安全说明
+
+- `assets/125_baijiahao.json` 是完整登录凭据，已由 `.gitignore` 排除，不得提交到仓库。
+- Demo 会完整打印 Cookie、封面 token、上传密钥、普通表单内容和响应；封面及视频分片等二进制
+  Base64 只保留前 100 个字符，同时打印原始长度和省略字符数。
+- 日志仍包含完整登录凭据，终端输出必须按完整登录凭据保存。
+- 视频使用 2 MiB 分片、并发数 3；单片失败后按 1、2、4 秒等待，最多请求 4 次。
+- 账号、预上传、封面、汇总、话题和最终发布接口均不自动重试。
+- 不支持断点续传或失败后的远端素材清理。
