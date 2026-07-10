@@ -1,0 +1,33 @@
+{
+  "name": "demo-video-upload",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "example:bilibili": "tsx examples/bilibili-upload.ts",
+    "example:douyin": "tsx examples/douyin-upload.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test examples/*.test.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check": "npm run typecheck && npm run lint && npm test"
+  },
+  "dependencies": {
+    "axios": "^1.18.1",
+    "axios-retry": "^4.5.0",
+    "crc-32": "1.2.2",
+    "file-type": "^22.0.1",
+    "p-limit": "^7.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.1",
+    "eslint": "^10.6.0",
+    "tsx": "^4.23.0",
+    "typescript": "~6.0.0",
+    "typescript-eslint": "^8.63.0"
+  }
+}

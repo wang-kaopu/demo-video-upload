@@ -1,0 +1,157 @@
+{
+  "cookies": [
+    {
+      "name": "buvid3",
+      "value": "AF29332B-D62F-4C35-1844-BBC45292D8C494383infoc",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1818151394.215907,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "b_nut",
+      "value": "1783591394",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1815127394.215971,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "bili_ticket",
+      "value": "eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODM4NTA1OTQsImlhdCI6MTc4MzU5MTMzNCwicGx0IjotMX0.TFIVTaXDoLQDMftlBKWJtEGJe3QnNSwGAh0nAbNtU7Q",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1783850594,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "bili_ticket_expires",
+      "value": "1783850534",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1783850594,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "buvid4",
+      "value": "0EB4F6DD-E0F7-790C-D83D-A2D8F42BA58695015-026070918-jn47oeqmvXIMHdhr5xnbRYDAvXrlhatY84ermFkSkbXIaY5AhZv4fK31MfCb8VDj",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1818151394.858891,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "buvid_fp",
+      "value": "87049b036a21e108f96b140fa21c39fb",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1815127394,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "SESSDATA",
+      "value": "207a8b1e%2C1799143401%2Ceb7e7%2A71CjDcw2Z3cWilRxmANVcWhIwaJa23bZAZidZPyiX7_JCxyzl4cPf07czAOH87H5UEtcsSVmJPSzhRbGRqTWhBdzE3eFJTWWpzb3BIQmRQUDJfeksyN2Q0clZQaGVBLThaeWdnN0JhWF9mVWxFdDN1cWVUVmlCUUlWa1lTbUVSVE9HSXR0b2tRRC13IIEC",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1784196200.904942,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bili_jct",
+      "value": "448d96fa1ee589c7f3d2b4cf690fd61c",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1784196200.904986,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "DedeUserID",
+      "value": "363332912",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1784196200.905,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "DedeUserID__ckMd5",
+      "value": "d0c53ee6e6be390e",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1784196200.905013,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sid",
+      "value": "g56qps24",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1784196200.905025,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_uuid",
+      "value": "310DCD1051-939B-CE107-DE7A-3CCA3146CAE901524infoc",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": 1815127401,
+      "httpOnly": false,
+      "secure": false
+    },
+    {
+      "name": "b_lsid",
+      "value": "F97D2BA2_19F4654FB36",
+      "domain": ".bilibili.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://member.bilibili.com",
+      "localStorage": [
+        {
+          "name": "BILI_MIRROR_REPORT_POOL",
+          "value": "{\"333.885.member.web-creative-center-platform.DATA.successReport\":{\"type\":\"custom\",\"mirrorVersion\":\"2.1.0\",\"_BiliGreyResult_method\":\"direct\",\"_BiliGreyResult_versionId\":\"257647\",\"mirrorPolymer\":3,\"/x/vupre/web/archive/white\":1}}"
+        },
+        {
+          "name": "RELEASE_CENTER_NEW_TAG",
+          "value": ""
+        },
+        {
+          "name": "KV_CONFIG_SDK",
+          "value": "{\"333.1333_0\":{\"timestamp\":1783591401531,\"lastUsed\":1783591401531,\"value\":{\"bilimirror.minilogin\":\"{\\\"buvid\\\":[\\\"B6771AA6-7CCD-4EF2-BA5B-1FDE9A25F49A49120infoc\\\",\\\"D025573B-8686-0D9D-48DB-0C84BBB5544A45226infoc\\\",\\\"9BD89CEC-4C19-E243-63B3-9A69417B70A458220infoc\\\",\\\"4AD0D8C7-D936-FB67-4C33-7A13C004E84478537infoc\\\",\\\"84AF2B23-9DC9-0717-A474-BCB7A866198994970infoc\\\",\\\"F4373CB5-E491-2C2A-0541-2FFFC3DF2FCC71448infoc\\\"],\\\"rate\\\":0}\",\"bilimirror.toplist\":\"{\\\"playLogUmd\\\":\\\"https://s1.hdslb.com/bfs/static/log-manipulator@0.2.1/index.js\\\",\\\"trackGray\\\":0,\\\"trackGrayV2\\\":1,\\\"resourceStats\\\":{\\\"enabled\\\":true,\\\"sampleRate\\\":0,\\\"rules\\\":[{\\\"key\\\":\\\"333.1007.main.home-page\\\",\\\"sampleRate\\\":5}]}}\",\"bilimirror.whitelist\":\"{\\\"white\\\":{\\\"rejection\\\":[\\\"extension\\\",\\\"maximum\\\",\\\"SVGIconNext\\\"],\\\"error\\\":[\\\"extension\\\",\\\"SVGIconNext\\\"],\\\"resource\\\":[\\\"extension\\\",\\\"localhost\\\"]},\\\"retry\\\":[],\\\"performance\\\":1,\\\"techpv\\\":5,\\\"poll\\\":5,\\\"userLog\\\":[],\\\"track\\\":{\\\"mid\\\":[],\\\"buvid\\\":[]},\\\"trackGrayV2\\\":1}\"},\"versionId\":\"1772162031366\",\"appVersionId\":\"37253\",\"nscode\":0,\"appKey\":\"333.1333\",\"expires\":2592000000},\"333.885_0\":{\"timestamp\":1783591401592,\"lastUsed\":1783591401592,\"value\":{\"bilimirror.whitelist\":\"{\\\"errorLevels\\\":{\\\"jsError\\\":[{\\\"conditions\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"http\\\"}],\\\"level\\\":\\\"record\\\"}],\\\"resourceError\\\":[{\\\"conditions\\\":[{\\\"field\\\":\\\"message\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"bfs\\\"}],\\\"level\\\":\\\"record\\\"}],\\\"rejectionError\\\":[{\\\"conditions\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"http\\\"}],\\\"level\\\":\\\"record\\\"}],\\\"apiError\\\":[{\\\"conditions\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"http\\\"}],\\\"level\\\":\\\"record\\\"},{\\\"conditions\\\":[{\\\"field\\\":\\\"api\\\",\\\"operator\\\":\\\"=\\\",\\\"value\\\":\\\"\\\"}],\\\"level\\\":\\\"record\\\"}]},\\\"microAppError\\\":{\\\"jsError\\\":[{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/frame\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/interactive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-interactive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/mooc-creator\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"mooc-creator\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/playlet\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-playlet\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/archive-process\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"archive-process\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/data\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"data-center-web\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/my-rights/create-protect\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"copyright-protect\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/convention\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"convention\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/template-incentive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"template-incentive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/clue-up\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"clue-up\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/excitation\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-excitation\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/incomeCenter\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-incomeCenter\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/allRound\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-allRound\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/adSettings\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-adSettings\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-missions\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-missions\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upMissionPc\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-upMissionPc\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-mission\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-mission\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upower-manage\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"upower-manage\\\"}],\\\"rejectionError\\\":[{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/frame\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/interactive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-interactive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/mooc-creator\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"mooc-creator\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/playlet\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-playlet\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/archive-process\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"archive-process\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/data\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"data-center-web\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/my-rights/create-protect\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"copyright-protect\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/convention\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"convention\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/template-incentive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"template-incentive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/clue-up\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"clue-up\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/excitation\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-excitation\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/incomeCenter\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-incomeCenter\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/allRound\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-allRound\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/adSettings\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-adSettings\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-missions\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-missions\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upMissionPc\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-upMissionPc\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-mission\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-mission\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upower-manage\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"upower-manage\\\"}],\\\"resourceError\\\":[{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/frame\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/video/interactive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-interactive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/mooc-creator\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"mooc-creator\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload/playlet\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"videoup-playlet\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/upload-manager/archive-process\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"archive-process\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/data\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"data-center-web\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/my-rights/create-protect\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"copyright-protect\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/convention\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"convention\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/template-incentive\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"template-incentive\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/clue-up\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"clue-up\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/excitation\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-excitation\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/incomeCenter\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-incomeCenter\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/allRound\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-allRound\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/adSettings\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-adSettings\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-missions\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-missions\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upMissionPc\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-upMissionPc\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/up-mission\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"allowance-up-mission\\\"},{\\\"condition\\\":[{\\\"field\\\":\\\"href\\\",\\\"operator\\\":\\\"contains\\\",\\\"value\\\":\\\"/platform/allowance/upower-manage\\\"}],\\\"origin\\\":\\\"member\\\",\\\"module\\\":\\\"upower-manage\\\"}]}}\"},\"versionId\":\"1769567888958\",\"appVersionId\":\"36938\",\"nscode\":0,\"appKey\":\"333.885\",\"expires\":2592000000}}"
+        },
+        {
+          "name": "peanut_entry_dot",
+          "value": "1"
+        },
+        {
+          "name": "__reporter-pb-sample-config",
+          "value": "{\"444.8.live-room.chronos.init.before.check\":50,\"333.788.memory.timeline.performance\":50,\"444.8.live-room.uam-player.welcome.failed\":50,\"333.1334.kv-init.error\":1,\"333.1334.kv-init.pv\":1,\"333.40181.secureCollect.collectDeviceInfo\":1,\"333.40181.secureCollect.successReport\":1,\"333.40181.secureCollect.wasmProcessTime\":1,\"444.8.live-room.room-page.live-web-danmaku-tech-report\":20}"
+        },
+        {
+          "name": "im_floatmsg_363332912",
+          "value": "{\"res\":{\"msg\":\"请求成功\",\"type\":\"success\",\"code\":0,\"data\":[],\"url\":\"//message.bilibili.com/api/tooltip/query.list.do\",\"payload\":{},\"cost\":198},\"ts\":1783591402122,\"uid\":\"363332912\"}"
+        }
+      ]
+    }
+  ]
+}
