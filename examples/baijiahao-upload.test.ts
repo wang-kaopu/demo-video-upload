@@ -351,9 +351,11 @@ test("serializeHttpValue also limits the cover Base64 form field", async () => {
 });
 
 test("parseCliOptions defaults to repository assets and leaves final publish disabled", () => {
+  assert.throws(() => parseCliOptions(["--upload"]), /Unknown option/u);
+
   const options = parseCliOptions([]);
   assert.ok(options);
-  assert.equal(options.upload, false);
+  assert.equal(options.publish, false);
   assert.equal(options.cookiesPath, join(REPOSITORY_ROOT, "assets/125_baijiahao.json"));
   assert.equal(options.videoPath, join(REPOSITORY_ROOT, "assets/demo.mp4"));
   assert.equal(options.coverPath, join(REPOSITORY_ROOT, "assets/demo.png"));

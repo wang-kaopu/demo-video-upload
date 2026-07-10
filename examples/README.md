@@ -1,5 +1,21 @@
 # 视频上传 Demo
 
+## 命令行参数对照
+
+| 参数 | Bilibili | 抖音 | 百家号 |
+| --- | --- | --- | --- |
+| `--video <path>` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4`，只支持 MP4 |
+| `--cover <path>` | 默认 `assets/demo.png` | 默认 `assets/demo.png` | 默认 `assets/demo.png`，自动生成横竖两版封面 |
+| `--text <path>` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` |
+| `--cookies <path>` | 默认 `assets/122_bilibili.json` | 不支持，使用 Electron partition | 默认 `assets/125_baijiahao.json` |
+| 发布开关 | `--publish` | `--publish` | `--publish` |
+| 分区或账号 | `--human-type2 <id>` | `--source-partition <id>`，必填 | 无 |
+| 可见性 | 无 | `--visibility self\|friends\|public` | 无 |
+| 查询模式 | `--list-types` | 无 | 无 |
+| 帮助 | `-h`、`--help` | `-h`、`--help` | `-h`、`--help` |
+
+三个 Demo 在不传发布开关时仍会真实上传视频和封面，并在远端保留未发布素材；发布开关只控制是否调用最终投稿或发布接口。
+
 ## Bilibili
 
 本示例按照 [`docs/bilibili.md`](../docs/bilibili.md) 的链路，使用当前账号 Cookie 完成 UPOS 视频分片上传、合并、封面上传，以及可选的最终投稿。
@@ -73,7 +89,7 @@ npm run example:bilibili -- \
 
 抖音示例按照 [`docs/douyin.md`](../docs/douyin.md) 的第 1～17 步实现。它直接使用
 `assets/douyin/<partition>` 中的 Electron Session，通过隐藏 Creator 窗口加载官方 BDMS，并以
-CDP 截获签名后的 URL。该签名探测请求总是在联网前终止，只有显式传入 `--upload` 才会另行提交作品。
+CDP 截获签名后的 URL。该签名探测请求总是在联网前终止，只有显式传入 `--publish` 才会另行提交作品。
 
 默认素材：
 
@@ -103,7 +119,7 @@ npm run example:douyin -- --source-partition 1783645517194
 ```bash
 npm run example:douyin -- \
   --source-partition 1783645517194 \
-  --upload
+  --publish
 ```
 
 默认可见性是 `self`（仅自己可见）。也可显式使用 `--visibility friends` 或
@@ -162,10 +178,10 @@ npm run example:baijiahao
 ### 正式发布
 
 ```bash
-npm run example:baijiahao -- --upload
+npm run example:baijiahao -- --publish
 ```
 
-`--upload` 只增加最后一次 `/pcui/article/publish` 请求。该请求不自动重试，成功响应会输出 `nid`，
+`--publish` 只增加最后一次 `/pcui/article/publish` 请求。该请求不自动重试，成功响应会输出 `nid`，
 作品仍需经过平台审核。视频发布接口没有原包可证实的可见性字段，因此 Demo 不提供可见性参数。
 
 ### 覆盖默认素材

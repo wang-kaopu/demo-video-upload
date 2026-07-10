@@ -203,8 +203,8 @@ export interface PublishPayloadInput {
 export interface BaijiahaoCliOptions {
   cookiesPath: string;
   coverPath: string;
+  publish: boolean;
   textPath: string;
-  upload: boolean;
   videoPath: string;
 }
 
@@ -1065,7 +1065,7 @@ async function publishVideo(
 }
 
 /**
- * 执行百家号视频素材上传，并按 --upload 决定是否提交作品。
+ * 执行百家号视频素材上传，并按 --publish 决定是否提交作品。
  *
  * @param options - 已解析的 CLI 输入
  */
@@ -1123,8 +1123,8 @@ async function runBaijiahaoDemo(options: BaijiahaoCliOptions): Promise<void> {
   console.log("========== PUBLISH PAYLOAD ==========");
   console.log(JSON.stringify(payload, null, 2));
 
-  if (!options.upload) {
-    console.log("步骤 1～6 已完成；未传 --upload，未调用最终发布接口。远端已保留视频和封面素材。");
+  if (!options.publish) {
+    console.log("步骤 1～6 已完成；未传 --publish，未调用最终发布接口。远端已保留视频和封面素材。");
     return;
   }
   console.log("[7/7] 提交发布（本步骤不重试）");
@@ -1158,8 +1158,8 @@ export function parseCliOptions(args: string[]): BaijiahaoCliOptions | undefined
       cookies: { type: "string" },
       cover: { type: "string" },
       help: { short: "h", type: "boolean" },
+      publish: { type: "boolean" },
       text: { type: "string" },
-      upload: { type: "boolean" },
       video: { type: "string" },
     },
     strict: true,
@@ -1171,8 +1171,8 @@ export function parseCliOptions(args: string[]): BaijiahaoCliOptions | undefined
   return {
     cookiesPath: resolveInputPath(parsed.values.cookies, join(REPOSITORY_ROOT, "assets/125_baijiahao.json")),
     coverPath: resolveInputPath(parsed.values.cover, join(REPOSITORY_ROOT, "assets/demo.png")),
+    publish: parsed.values.publish ?? false,
     textPath: resolveInputPath(parsed.values.text, join(REPOSITORY_ROOT, "assets/demo.txt")),
-    upload: parsed.values.upload ?? false,
     videoPath: resolveInputPath(parsed.values.video, join(REPOSITORY_ROOT, "assets/demo.mp4")),
   };
 }
@@ -1189,7 +1189,7 @@ function printHelp(): void {
   --video <path>           MP4 视频文件
   --cover <path>           单一源封面，自动裁剪横版和竖版
   --text <path>            首个非空行标题、后续描述和可选 #话题
-  --upload                 执行最终发布；不传时仍真实上传视频和封面
+  --publish                执行最终发布；不传时仍真实上传视频和封面
   -h, --help               显示帮助
 
 警告：Demo 会完整打印 Cookie、token、上传密钥和普通请求体；二进制 Base64 只保留前 100 个字符。

@@ -65,8 +65,8 @@ interface MultipartPartResult {
 
 interface CliOptions {
   coverPath: string;
+  publish: boolean;
   textPath: string;
-  upload: boolean;
   videoPath: string;
   visibility: DouyinVisibility;
 }
@@ -965,8 +965,8 @@ async function runUpload(options: CliOptions): Promise<void> {
     unsignedUrl,
   }) as CreateV2SigningResult;
 
-  if (!options.upload) {
-    console.log("签名验证成功；未传 --upload，未调用 create_v2，作品尚未正式发布。");
+  if (!options.publish) {
+    console.log("签名验证成功；未传 --publish，未调用 create_v2，作品尚未正式发布。");
     return;
   }
 

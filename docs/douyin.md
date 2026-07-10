@@ -1340,7 +1340,7 @@ await http.post(url, bodyText, {
 - 在主进程中按 `_ae/CIt` 生成 ticket-guard Header，并计算 VOD/ImageX V4 签名。
 
 CLI 必须显式指定 `--source-partition <纯数字 id>`。默认仍会真实上传视频和封面并执行第 16 步，
-但不会提交作品；只有 `--upload` 才执行第 17 步。可见性默认为 `--visibility self`，还支持
+但不会提交作品；只有 `--publish` 才执行第 17 步。可见性默认为 `--visibility self`，还支持
 `friends` 和 `public`。第 17 步不重试。
 
 当前 Demo 不读取 Playwright storage-state，也不依赖小豆芽进程、NewRank `getDySign` 或

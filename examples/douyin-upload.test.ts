@@ -136,9 +136,13 @@ test("buildPublishPayload creates a self-visible create_v2 body", () => {
 test("parseCliOptions requires a numeric partition and safe defaults", () => {
   assert.throws(() => parseCliOptions([]), /source-partition/u);
   assert.throws(() => parseCliOptions(["--source-partition", "abc"]), /纯数字/u);
+  assert.throws(
+    () => parseCliOptions(["--source-partition", "1783645517194", "--upload"]),
+    /Unknown option/u,
+  );
 
   const options = parseCliOptions(["--source-partition", "1783645517194"]);
   assert.equal(options?.sourcePartition, "1783645517194");
-  assert.equal(options?.upload, false);
+  assert.equal(options?.publish, false);
   assert.equal(options?.visibility, "self");
 });

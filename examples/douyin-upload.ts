@@ -12,10 +12,10 @@ const electronPath = createRequire(import.meta.url)("electron") as string;
 
 export interface DouyinCliOptions {
   coverPath: string;
+  publish: boolean;
   repositoryRoot: string;
   sourcePartition: string;
   textPath: string;
-  upload: boolean;
   videoPath: string;
   visibility: DouyinVisibility;
 }
@@ -47,9 +47,9 @@ export function parseCliOptions(args: string[]): DouyinCliOptions | undefined {
     options: {
       cover: { type: "string" },
       help: { short: "h", type: "boolean" },
+      publish: { type: "boolean" },
       "source-partition": { type: "string" },
       text: { type: "string" },
-      upload: { type: "boolean" },
       video: { type: "string" },
       visibility: { type: "string" },
     },
@@ -67,10 +67,10 @@ export function parseCliOptions(args: string[]): DouyinCliOptions | undefined {
 
   return {
     coverPath: resolveInputPath(parsed.values.cover, join(REPOSITORY_ROOT, "assets/demo.png")),
+    publish: parsed.values.publish ?? false,
     repositoryRoot: REPOSITORY_ROOT,
     sourcePartition,
     textPath: resolveInputPath(parsed.values.text, join(REPOSITORY_ROOT, "assets/demo.txt")),
-    upload: parsed.values.upload ?? false,
     videoPath: resolveInputPath(parsed.values.video, join(REPOSITORY_ROOT, "assets/demo.mp4")),
     visibility: parseVisibility(parsed.values.visibility),
   };
@@ -133,10 +133,10 @@ function printHelp(): void {
   --text <path>                    首行标题、后续描述和可选 #话题
   --visibility <self|friends|public>
                                   默认 self，仅自己可见
-  --upload                         执行 create_v2 正式发布
+  --publish                        执行 create_v2 正式发布
   -h, --help                       显示帮助
 
-未传 --upload 时仍会真实执行第 1～16 步，上传视频和封面，但不会创建作品。
+未传 --publish 时仍会真实执行第 1～16 步，上传视频和封面，但不会创建作品。
 `);
 }
 
