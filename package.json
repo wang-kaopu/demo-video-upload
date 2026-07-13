@@ -12,6 +12,7 @@
     "example:baijiahao": "tsx examples/baijiahao-upload.ts",
     "example:bilibili": "tsx examples/bilibili-upload.ts",
     "example:douyin": "npm run build:example:douyin && tsx examples/douyin-upload.ts",
+    "example:sohu": "tsx examples/sohu-upload.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test examples/*.test.ts",
     "test:service": "npm run build:service && tsx --test service/*.test.ts",

@@ -2,19 +2,19 @@
 
 ## 命令行参数对照
 
-| 参数 | Bilibili | 抖音 | 百家号 |
-| --- | --- | --- | --- |
-| `--video <path>` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4`，只支持 MP4 |
-| `--cover <path>` | 默认 `assets/demo.png` | 默认 `assets/demo.png` | 默认 `assets/demo.png`，自动生成横竖两版封面 |
-| `--text <path>` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` |
-| `--cookies <path>` | 默认 `assets/122_bilibili.json` | 不支持，使用 Electron partition | 默认 `assets/125_baijiahao.json` |
-| 发布开关 | `--publish` | `--publish` | `--publish` |
+| 参数 | Bilibili | 抖音 | 百家号 | 搜狐号 |
+| --- | --- | --- | --- | --- |
+| `--video <path>` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4` | 默认 `assets/demo.mp4`，只支持 MP4 | 默认 `assets/demo.mp4` |
+| `--cover <path>` | 默认 `assets/demo.png` | 默认 `assets/demo.png` | 默认 `assets/demo.png`，自动生成横竖两版封面 | 默认 `assets/demo.png`，生成 3:2 JPEG |
+| `--text <path>` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` | 默认 `assets/demo.txt` |
+| `--cookies <path>` | 默认 `assets/122_bilibili.json` | 不支持，使用 Electron partition | 默认 `assets/125_baijiahao.json` | 默认 `assets/133_sohu.json` |
+| 发布开关 | `--publish` | `--publish` | `--publish` | `--publish` |
 | 分区或账号 | `--human-type2 <id>` | `--source-partition <id>`，必填 | 无 |
 | 可见性 | 无 | `--visibility self\|friends\|public` | 无 |
 | 查询模式 | `--list-types` | 无 | 无 |
 | 帮助 | `-h`、`--help` | `-h`、`--help` | `-h`、`--help` |
 
-三个 Demo 在不传发布开关时仍会真实上传视频和封面，并在远端保留未发布素材；发布开关只控制是否调用最终投稿或发布接口。
+四个 Demo 在不传发布开关时仍会真实上传视频和封面，并在远端保留未发布素材；发布开关只控制是否调用最终投稿或发布接口。
 
 ## Bilibili
 
@@ -206,3 +206,41 @@ npm run example:baijiahao -- \
 - 视频使用 2 MiB 分片、并发数 3；单片失败后按 1、2、4 秒等待，最多请求 4 次。
 - 账号、预上传、封面、汇总、话题和最终发布接口均不自动重试。
 - 不支持断点续传或失败后的远端素材清理。
+
+## 搜狐号
+
+搜狐号示例按照 [`docs/sohu.md`](../docs/sohu.md) 复刻当前生产版内容管理前端协议。它直接读取
+Playwright storage-state，通过 Axios 构造 HTTP 请求，不点击发布页，也不注入 DOM 元素。
+
+### 上传但不发布
+
+```bash
+npm run example:sohu
+```
+
+该命令会真实创建视频任务、上传并合并 512 KiB 分片、上传和裁剪封面、查询频道并构造发布参数，
+但不会调用最终发布接口。生成的请求体会保存到 `assets/sohu-publish-payload.json`。
+
+### 正式发布
+
+```bash
+npm run example:sohu -- --publish
+```
+
+如果已经执行过“上传但不发布”，可直接发布保存的请求体，避免重复上传：
+
+```bash
+npm run example:sohu -- --publish-payload assets/sohu-publish-payload.json
+```
+
+如果账号默认频道没有可用的二级分类，可显式传入：
+
+```bash
+npm run example:sohu -- --channel-id 15 --video-channel-id 101
+```
+
+### 搜狐号安全说明
+
+- `assets/133_sohu.json` 是完整登录凭据，已由 `.gitignore` 排除。
+- HTTP 日志会记录请求参数与响应，但 Cookie 会被隐藏。
+- 最终发布请求不重试，避免响应不确定时创建重复作品。
